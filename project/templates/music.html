@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Matthew Flynn's Music</title>
+  <link rel='stylesheet' href="{{ url_for('static', filename='style.css') }}"
+  type='text/css'>
+
+</head>
+<body>
+
+  <h1>Music</h1>
+
+  {% for track in tracks %}
+
+  <div class='track'>
+    <h3>{{ track.name }}
+      {% if track.full is sameas true %}
+        (Full Track)
+      {% endif %}
+    </h3>
+    <p class='track_desc'>{{ track.genre }}</p>
+    <audio controls>
+      <source src='{{ track.path }}' type='audio/mpeg'>
+      You browser does not support audio playback
+    </audio>
+  </div>
+
+  {% endfor %}
+
+</body>
+</html>

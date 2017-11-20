@@ -18,8 +18,8 @@ class Track(Base):
     # indicates if the whole track will play or if just a 30 second sample will
     full = Column(Boolean)
 
-    def __init__(self, name=None, genre="Soundtrack", path=None, full=False):
+    def __init__(self, name=None, genre=None, fname=None, full=None):
         self.name = name
         self.genre = genre
-        self.path = path
+        self.path = "static/samples/" + fname
         self.full = full
