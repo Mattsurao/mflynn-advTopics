@@ -1,25 +1,35 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+class Project(Base):
+
+    __tablename__ = 'project'
+
+    id = Column(Integer, primary_key=True)
+    # the name of the project
+    name = Column(String(63), unique=True)
+    # my title for the project
+    title = Column(String(31))
+    # the person or organization I worked for
+    commisioner = Column(String(63))
+    # the genre of the commision. Currently: Classical, Soundtrack
+    genre = Column(String(10))
+    # when the project took place
+    '''start_date = Column(Date?)
+    end_date'''
+
 # an Object to represent a track that a user can listen to
 class Track(Base):
 
-    __tablename__ = 'tracks'
+    __tablename__ = 'track'
 
     id = Column(Integer, primary_key=True)
+    project = Column(Integer, ForeignKey('project.id'))
     # the name of the track
     name = Column(String(127), unique=True)
-    # acceptable values: Classical, Soundtrack
-    genre = Column(String(10))
     # the path to the file
     path = Column(String(255))
-    # indicates if the whole track will play or if just a 30 second sample will
-    full = Column(Boolean)
-
-    def __init__(self, name=None, genre=None, fname=None, full=None):
-        self.name = name
-        self.genre = genre
-        self.path = "static/samples/" + fname
-        self.full = full
+    # 0 = the whole track plays.  1 = a 30 second sample.  2 = no playback
+    full = Column(Integer)
