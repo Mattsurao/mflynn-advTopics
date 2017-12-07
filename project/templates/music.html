@@ -16,9 +16,7 @@
       <h1>{{ project.name }}</h1>
 
         {% for track in tracks %}
-          <!---->
           {% if track.project_id == project.id %}
-          {% endif %}
             <div class=track>
               <h2>{{ track.name }}</h2>
               <audio controls>
@@ -26,7 +24,7 @@
                 Your browser does not support audio playback
               </audio>
             </div>
-          <!---->
+          {% endif %}
         {% endfor %}
 
       </h1>
