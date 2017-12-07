@@ -15,15 +15,22 @@
     <div class=project>
       <h1>{{ project.name }}</h1>
 
-      {% for track in tracks %}
-      {% if track.project_id == project.id %}
-        <div class=track>
-          <h2>{{ track.name }}</h2>
-          <audio controls>
-            <source src="{{ track.path }}">
-            Your browser does not support audio playback
-          </audio>
-        </div>
+        {% for track in tracks %}
+          {% if track.project_id == project.id %}
+            <div class=track>
+              <h2>{{ track.name }}</h2>
+              <audio controls>
+                <source src="{{ url_for('static',filename='static/'+track.path) }}">
+                Your browser does not support audio playback
+              </audio>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+      </h1>
+    </div>
+
+  {% endfor %}
 
 </body>
 </html>
