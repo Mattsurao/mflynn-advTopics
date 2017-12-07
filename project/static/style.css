@@ -1,11 +1,16 @@
+/* Style for the whole page */
+
+body {
+  background: linen;
+}
+
 /* Style for the tracks */
 
 div.track {
-  /* Background */
+  /* Backgrounds */
   background-color: black;
   border-radius: 8px;
   /* Text */
-  color: white
 }
 
 div.track h3, p{
