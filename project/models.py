@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -16,9 +17,6 @@ class Project(Base):
     commisioner = Column(String(63))
     # the genre of the commision. Currently: Classical, Soundtrack
     genre = Column(String(10))
-    # when the project took place
-    '''start_date = Column(Date?)
-    end_date'''
 
 # an Object to represent a track that a user can listen to
 class Track(Base):
@@ -26,10 +24,11 @@ class Track(Base):
     __tablename__ = 'track'
 
     id = Column(Integer, primary_key=True)
-    project = Column(Integer, ForeignKey('project.id'))
     # the name of the track
     name = Column(String(127), unique=True)
     # the path to the file
     path = Column(String(255))
     # 0 = the whole track plays.  1 = a 30 second sample.  2 = no playback
     full = Column(Integer)
+    project_id = Column(Integer, ForeignKey('project.id'))
+    project = relationship(Project)

@@ -2,7 +2,7 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 # imports for database handling
-from models import Base, Track
+from models import Base, Track, Project
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
@@ -13,17 +13,26 @@ def setup():
     # set up the database
     Base.metadata.drop_all(bind=db.engine)
     Base.metadata.create_all(bind=db.engine)
-    db.session.add(Track("Random Encounter", "Soundtrack",
-            "Random Encounter 2.mp3", True))
-    db.session.add(Track("Human Towns", "Soundtrack", "Human Towns.mp3", True))
-    db.session.add(Track("Mystery", "Soundtrack", "Mystery.mp3", True))
+    project1 = db.session.add(Project(name='No Hero', title='Audio Director',
+                                      commisioner='Myself', genre='Soundtrack'))
+    db.session.add(Track(name='Mystery', path=track_path('Mystery.mp3'),
+                         full=0, project=project1))
+    db.session.add(Track(name='Town 1', path=track_path('Human Towns.mp3'),
+                         full=0, project=project1))
+    db.session.add(Track(name='Battle', path=track_path('Random Encounter.mp3'),
+                         full=0, project=project1))
+    db.session.add()
     db.session.commit()
 
 @app.route('/music')
 def music():
-    track_list = db.session.query(Track).all()
-    return render_template('music.html', tracks=track_list)
+    projects = db.session.query(Project).all()
+    tracks = db.session.query(Track).all()
+    return render_template('music.html', projects=projects, tracks=tracks)
+
+def track_path(trackname):
+    return url_for('static', filename='samples/' + trackname)
 
 if __name__ == '__main__':
     app.debug = True
-    app.run('127.0.0.1', 5000)
+    app.run('127.0.0.1', 8000)

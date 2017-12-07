@@ -10,22 +10,20 @@
 
   <h1>Music</h1>
 
-  {% for track in tracks %}
+  {% for project in projects %}
 
-  <div class='track'>
-    <h3>{{ track.name }}
-      {% if track.full is sameas true %}
-        (Full Track)
-      {% endif %}
-    </h3>
-    <p class='track_desc'>{{ track.genre }}</p>
-    <audio controls>
-      <source src='{{ track.path }}' type='audio/mpeg'>
-      You browser does not support audio playback
-    </audio>
-  </div>
+    <div class=project>
+      <h1>{{ project.name }}</h1>
 
-  {% endfor %}
+      {% for track in tracks %}
+      {% if track.project_id == project.id %}
+        <div class=track>
+          <h2>{{ track.name }}</h2>
+          <audio controls>
+            <source src="{{ track.path }}">
+            Your browser does not support audio playback
+          </audio>
+        </div>
 
 </body>
 </html>
