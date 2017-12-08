@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from models import Base, Track, Project
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
 @app.before_first_request
@@ -13,8 +13,9 @@ def setup():
     # set up the database
     Base.metadata.drop_all(bind=db.engine)
     Base.metadata.create_all(bind=db.engine)
-    project1 = db.session.add(Project(name='No Hero', title='Audio Director',
-                                      commisioner='Myself', genre='Soundtrack'))
+    project1 = Project(name='No Hero', title='Audio Director',
+                       commisioner='Myself', genre='Soundtrack')
+    db.session.add(project1)
     db.session.add(Track(name='Mystery', path='Mystery.mp3', full=0,
                          project=project1))
     db.session.add(Track(name='Town 1', path='Human Towns.mp3', full=0,

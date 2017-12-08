@@ -1,14 +1,14 @@
 /* Style for the whole page */
-
+/*
 body {
   background: linen;
 }
 
 /* Style for the tracks */
 
-div.track {
+.track {
   /* Backgrounds */
   background-color: black;
   border-radius: 8px;
-  /* Text */
+  color: white;
 }
