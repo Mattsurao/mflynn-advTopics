@@ -8,6 +8,16 @@
 </head>
 <body>
 
+  <!-- the Navigation Bar -->
+  <div id="nav_bar">
+    <ul>
+      <li><a href="home.html" class="clear_fix">Home</a></li>
+      <li><a href="music.html" class="clear_fix active">Music</a></li>
+      <li><a href="bio.html" class="clear_fix">Bio</a></li>
+    </ul>
+    <img src="{{ url_for('static', filename='vgm_note.png')}}" id="note" oncontextmenu="return false">
+  </div>
+
   <h1>Music</h1>
 
   {% for project in projects %}
@@ -19,8 +29,8 @@
           {% if track.project_id == project.id %}
             <div class=track>
               <h2>{{ track.name }}</h2>
-              <audio controls>
-                <source src="{{ url_for('static',filename='static/'+track.path) }}">
+              <audio controls oncontextmenu="return false">
+                <source src="{{ url_for('static', filename='static/' + track.path) }}">
                 Your browser does not support audio playback
               </audio>
             </div>
