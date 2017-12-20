@@ -1,10 +1,61 @@
 /* Style for the whole page */
-
-body {
-  background: linen;
+html {
+  font: Georgia Serif;
 }
 
-/* Style for the tracks */
+body {
+  margin: 0px;
+  /* temporary background color, until I take a pic of me at the piano */
+  background-color: rgb(232, 212, 186);
+}
+
+/* Style defenitions for the navigation bar */
+  /* Navigation Bar RGB Ratio: 3:2:4 */
+
+div#nav_bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(48, 32, 64);
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+div#nav_bar ul li {
+  float: left;
+}
+
+div#nav_bar img#note {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  height: 43px;
+  width: 43px;
+  padding: 4px 3px 3px 3px;
+  background-color: rgb(96, 64, 128);
+}
+
+div#nav_bar ul li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px 24px;
+    text-decoration: none;
+}
+
+div#nav_bar ul li a:hover{
+  background-color: rgb(32, 24, 48);
+}
+
+/* This is the page the user is currently on */
+div#nav_bar ul li a.active{
+  background-color: rgb(96, 64, 128);
+  pointer-events: none;
+  cursor: pointer;
+}
+
+/* Style Defenitions for tracks */
 
 div.track {
   /* Backgrounds and Spacing */
@@ -14,5 +65,4 @@ div.track {
   margin-left: 30%;
   margin-right: 30%;
   padding: 31px;
-  color: white;
 }

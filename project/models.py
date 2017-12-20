@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Boolean, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -18,6 +18,16 @@ class Project(Base):
     # the genre of the commision. Currently: Classical, Soundtrack
     genre = Column(String(10))
 
+    @property
+    def serialize(self):
+        return {
+            'name': self.name,
+            'id': self.id,
+            'title': self.title,
+            'commisioner': self.commisioner,
+            'genre': self.genre
+        }
+
 # an Object to represent a track that a user can listen to
 class Track(Base):
 
@@ -28,7 +38,17 @@ class Track(Base):
     name = Column(String(127), unique=True)
     # the path to the file
     path = Column(String(255))
-    # 0 = the whole track plays.  1 = a 30 second sample.  2 = no playback
-    full = Column(Integer)
+    # whether or not the track has audio a user can listen to
+    playback = Column(Boolean)
+    # whether or not the track has sheet music a user can download
+    pdf = Column(Boolean)
     project_id = Column(Integer, ForeignKey('project.id'))
     project = relationship(Project)
+
+    @property
+    def serialize(self):
+        return {
+            'name': self.name,
+            'id': self.id,
+            'project': self.project.name
+        }

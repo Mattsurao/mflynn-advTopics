@@ -8,26 +8,69 @@
 </head>
 <body>
 
+  <!-- the Navigation Bar -->
+  <div id="nav_bar">
+    <ul>
+      <li><a href="home.html" class="clear_fix">Home</a></li>
+      <li><a href="music.html" class="clear_fix active">Music</a></li>
+      <li><a href="bio.html" class="clear_fix">Bio</a></li>
+    </ul>
+    <img src="{{ url_for('static', filename='vgm_note.png')}}" id="note" oncontextmenu="return false">
+  </div>
+
   <h1>Music</h1>
 
+  <!-- loop through all the projects and display them -->
   {% for project in projects %}
 
     <div class=project>
       <h1>{{ project.name }}</h1>
 
+      <!-- get all the tracks in this project -->
+      {% for p in all_tracks %}
+        {% if p[0].project_id == project.id %}
+          {% set tracks = p %}
+        {% endif %}
+      {% endfor %}
+
+      <!-- the project is displayed differently if there's only 1 track -->
+      {% if tracks|length == 1 %}
+        <div class=track>
+          <!-- display any files: MP3s, PDFs, etc. -->
+          {% if tracks[0].playback %}
+            <audio controls oncontextmenu='return false'>
+              <source src="{{ url_for('static', filename = tracks[0].path + '.mp3') }}">
+              Your browser does not support audio playback
+            </audio>
+          {% endif %}
+          {% if tracks[0].pdf %}
+            <a href="{{ url_for('static', filename = tracks[0].path + '.pdf') }}" download>
+              sheet music
+            </a>
+          {% endif %}
+        </div>
+
+      <!-- when there's more than 1 track in the project -->
+      {% else %}
         {% for track in tracks %}
-          {% if track.project_id == project.id %}
-            <div class=track>
-              <h2>{{ track.name }}</h2>
-              <audio controls>
-                <source src="{{ url_for('static',filename='static/'+track.path) }}">
+          <div class=track>
+            <h2>{{ track.name }}</h2>
+            <!-- display any files: MP3s, PDFs, etc. -->
+            {% if track.playback %}
+              <audio controls oncontextmenu='return false'>
+                <source src="{{ url_for('static', filename = track.path + '.mp3') }}">
                 Your browser does not support audio playback
               </audio>
-            </div>
-          {% endif %}
+            {% endif %}
+            {% if track.pdf %}
+              <a href="{{ url_for('static', filename = track.path + '.pdf') }}" download>
+                sheet music
+              </a>
+            {% endif %}
+          </div>
         {% endfor %}
+      {% endif %}
 
-      </h1>
     </div>
 
   {% endfor %}
