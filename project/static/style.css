@@ -1,14 +1,18 @@
 /* Style for the whole page */
-/*
+
 body {
   background: linen;
 }
 
 /* Style for the tracks */
 
-.track {
-  /* Backgrounds */
+div.track {
+  /* Backgrounds and Spacing */
   background-color: black;
   border-radius: 8px;
+  margin-top: 31px;
+  margin-left: 30%;
+  margin-right: 30%;
+  padding: 31px;
   color: white;
 }
