@@ -14,24 +14,25 @@ def setup():
     Base.metadata.drop_all(bind=db.engine)
     Base.metadata.create_all(bind=db.engine)
     # project1 - No Hero
-    project1 = Project(name='No Hero', title='Audio Director',
-                       commisioner='Myself', genre='Soundtrack')
+    project1 = Project(name='No Hero',title='Audio Director',genre='Soundtrack',
+                       commisioner=None, audio_text='Audio from the game',
+                       desc="""'No Hero' is a video game currently in development by myself, for which I'm also composing the music.  The game is an RPG that combines classic gameplay elements from games like Dragon Quest and Final Fantasy with the better quality art and music that today's technology allows.""")
     db.session.add(project1)
     db.session.add(Track(name='Mystery', path='Mystery', playback=True,
                          pdf=True, project=project1))
     db.session.add(Track(name='Town 1', path='Human Towns', playback=True,
                          pdf=False, project=project1))
-    db.session.add(Track(name='Battle', path='Random Encounter', playback=True,
+    db.session.add(Track(name='Battle', path='Random Encounter 2', playback=True,
                          pdf=False, project=project1))
     # project2 - Quintet of Night and Day
     project2 = Project(name='Quintet of Night and Day', title='Composer',
-                       commisioner='Settlement Music School', genre='Classical')
+                       commisioner=None, genre='Classical')
     db.session.add(project2)
     db.session.add(Track(name='Quintet of Night and Day', path='Quintet',
                          playback=False, pdf=True, project=project2))
     # project2 - The Top
     project3 = Project(name='The Top', title='Composer', genre='Classical',
-                       commisioner='Settlement Music School')
+                       commisioner=None)
     db.session.add(project3)
     db.session.add(Track(name='The Top', path='The Top', playback=False,
                          pdf=True, project=project3))

@@ -11,9 +11,10 @@
   <!-- the Navigation Bar -->
   <div id="nav_bar">
     <ul>
-      <li><a href="home.html" class="clear_fix">Home</a></li>
-      <li><a href="music.html" class="clear_fix active">Music</a></li>
-      <li><a href="bio.html" class="clear_fix">Bio</a></li>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="music.html" class="active">Music</a></li>
+      <li><a href="bio.html">Bio</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
     </ul>
     <img src="{{ url_for('static', filename='vgm_note.png')}}" id="note" oncontextmenu="return false">
   </div>
@@ -24,28 +25,33 @@
   {% for project in projects %}
 
     <div class=project>
-      <h1>{{ project.name }}</h1>
-
-      <!-- get all the tracks in this project -->
-      {% for p in all_tracks %}
-        {% if p[0].project_id == project.id %}
-          {% set tracks = p %}
+      <div class=proj_head>
+        <h1>{{ project.genre }}: {{ project.name }}</h1>
+        <p>{{ project.desc }}</p>
+        <p>{{ project.title }}</p>
+        {% if project.commisioner != None %}
+          <p>Commisioner: {{ project.commisioner }}</p>
         {% endif %}
-      {% endfor %}
+      </div>
+
+      {% set tracks = all_tracks[project.id - 1] %}
 
       <!-- the project is displayed differently if there's only 1 track -->
       {% if tracks|length == 1 %}
         <div class=track>
           <!-- display any files: MP3s, PDFs, etc. -->
           {% if tracks[0].playback %}
-            <audio controls oncontextmenu='return false'>
-              <source src="{{ url_for('static', filename = tracks[0].path + '.mp3') }}">
-              Your browser does not support audio playback
-            </audio>
+            <div class=audio>
+              <p>{{ project.audio_text }}</p>
+              <audio controls oncontextmenu='return false'>
+                <source src="{{ url_for('static', filename = tracks[0].path + '.mp3') }}">
+                Your browser does not support audio playback
+              </audio>
+            </div>
           {% endif %}
           {% if tracks[0].pdf %}
             <a href="{{ url_for('static', filename = tracks[0].path + '.pdf') }}" download>
-              sheet music
+              sheet music download
             </a>
           {% endif %}
         </div>
@@ -64,7 +70,7 @@
             {% endif %}
             {% if track.pdf %}
               <a href="{{ url_for('static', filename = track.path + '.pdf') }}" download>
-                sheet music
+                sheet music download
               </a>
             {% endif %}
           </div>

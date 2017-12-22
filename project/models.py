@@ -17,6 +17,10 @@ class Project(Base):
     commisioner = Column(String(63))
     # the genre of the commision. Currently: Classical, Soundtrack
     genre = Column(String(10))
+    # a description of the project
+    desc = Column(String(383))
+    # text to appear above audio elements of tracks in this project
+    audio_text = Column(String(31))
 
     @property
     def serialize(self):
@@ -36,8 +40,8 @@ class Track(Base):
     id = Column(Integer, primary_key=True)
     # the name of the track
     name = Column(String(127), unique=True)
-    # the path to the file
-    path = Column(String(255))
+    # the name of files associated with this track (in the 'static' folder)
+    path = Column(String(31))
     # whether or not the track has audio a user can listen to
     playback = Column(Boolean)
     # whether or not the track has sheet music a user can download

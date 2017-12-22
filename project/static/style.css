@@ -55,14 +55,60 @@ div#nav_bar ul li a.active{
   cursor: pointer;
 }
 
-/* Style Defenitions for tracks */
+/* Style Defenitions for the projects */
+
+div.proj_head {
+  margin-top: 31px;
+  margin-bottom: 31px;
+  padding-left: auto;
+  padding-right: auto;
+  text-align: center;
+  color: white;
+  background: linear-gradient(to right, rgba(96,64,128,0), rgba(96,64,128,1),
+  rgba(96,64,129,0));
+}
+
+div.proj_head h1 {
+  margin: 10px;
+}
+
+div.proj_head p, h1 {
+  margin-top: 6px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+/* Style Defenitions for individual tracks */
 
 div.track {
-  /* Backgrounds and Spacing */
   background-color: black;
   border-radius: 8px;
   margin-top: 31px;
   margin-left: 30%;
   margin-right: 30%;
-  padding: 31px;
+  margin-bottom: 31px;
+  padding-top: 31px;
+  padding-left: 31px;
+  padding-right: auto;
+  padding-bottom: 31px;
+}
+
+div.track div.audio {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+div.track a {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+div.track h2 {
+  margin-top: 0px;
+  margin-bottom: 8px;
+  color: white;
 }
