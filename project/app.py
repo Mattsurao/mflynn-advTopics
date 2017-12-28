@@ -7,16 +7,22 @@ from models import Base, Track, Project
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 @app.before_first_request
 def setup():
     # set up the database
     Base.metadata.drop_all(bind=db.engine)
     Base.metadata.create_all(bind=db.engine)
+    # get the project descriptions from the text file
+    f = open('static\descriptions.txt', 'r')
+    descriptions = f.readlines()
+    f.close()
     # project1 - No Hero
+    d = get_description(descriptions, 0)
     project1 = Project(name='No Hero',title='Audio Director',genre='Soundtrack',
-                       commisioner=None, audio_text='Audio from the game',
-                       desc="""'No Hero' is a video game currently in development by myself, for which I'm also composing the music.  The game is an RPG that combines classic gameplay elements from games like Dragon Quest and Final Fantasy with the better quality art and music that today's technology allows.""")
+                       audio_text='Audio from the game', desc=d,
+                       date='2016 - Ongoing')
     db.session.add(project1)
     db.session.add(Track(name='Mystery', path='Mystery', playback=True,
                          pdf=True, project=project1))
@@ -25,14 +31,17 @@ def setup():
     db.session.add(Track(name='Battle', path='Random Encounter 2', playback=True,
                          pdf=False, project=project1))
     # project2 - Quintet of Night and Day
+    d = get_description(descriptions, 1)
     project2 = Project(name='Quintet of Night and Day', title='Composer',
-                       commisioner=None, genre='Classical')
+                       commisioner=None, genre='Classical', desc=d,
+                       date='Dec. 2016 - Jan. 2017')
     db.session.add(project2)
     db.session.add(Track(name='Quintet of Night and Day', path='Quintet',
                          playback=False, pdf=True, project=project2))
     # project2 - The Top
+    d = get_description(descriptions, 2)
     project3 = Project(name='The Top', title='Composer', genre='Classical',
-                       commisioner=None)
+                       commisioner=None, desc=d, date='Apr. - May 2017')
     db.session.add(project3)
     db.session.add(Track(name='The Top', path='The Top', playback=False,
                          pdf=True, project=project3))
@@ -49,6 +58,12 @@ def music():
     for track in tracks:
         sort[track.project_id - 1].append(track)
     return render_template('music.html', projects=projects, all_tracks=sort)
+
+def get_description(descriptions, index):
+    if len(descriptions) > index:
+        return descriptions[index]
+    else:
+        return None
 
 if __name__ == '__main__':
     app.debug = True

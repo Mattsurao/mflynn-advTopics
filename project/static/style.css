@@ -98,6 +98,11 @@ div.track div.audio {
   margin-bottom: 8px;
 }
 
+div.track div.audio p {
+  color: white;
+  margin: 0px;
+}
+
 div.track a {
   display: block;
   margin-top: 8px;

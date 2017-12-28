@@ -63,10 +63,13 @@
             <h2>{{ track.name }}</h2>
             <!-- display any files: MP3s, PDFs, etc. -->
             {% if track.playback %}
-              <audio controls oncontextmenu='return false'>
-                <source src="{{ url_for('static', filename = track.path + '.mp3') }}">
-                Your browser does not support audio playback
-              </audio>
+              <div class=audio>
+                <p>{{ project.audio_text }}</p>
+                <audio controls oncontextmenu='return false'>
+                  <source src="{{ url_for('static', filename = track.path + '.mp3') }}">
+                  Your browser does not support audio playback
+                </audio>
+              </div>
             {% endif %}
             {% if track.pdf %}
               <a href="{{ url_for('static', filename = track.path + '.pdf') }}" download>
