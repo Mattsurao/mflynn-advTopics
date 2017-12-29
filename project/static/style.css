@@ -78,6 +78,25 @@ div.proj_head p, h1 {
   margin-right: 30%;
 }
 
+button.details {
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  font-family: Georgia Serif !important;
+  font-size: 15px !important;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 0px;
+}
+
+button.details:hover {
+  color: rgb(231, 223, 255);
+}
+
+div.details_panel {
+  display: none;
+}
+
 /* Style Defenitions for individual tracks */
 
 div.track {
@@ -110,6 +129,10 @@ div.track a {
   color: white;
   font-weight: bold;
   text-decoration: none;
+}
+
+div.track a:hover {
+  color: rgb(231, 223, 255);
 }
 
 div.track h2 {

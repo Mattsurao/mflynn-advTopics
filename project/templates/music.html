@@ -28,10 +28,14 @@
       <div class=proj_head>
         <h1>{{ project.genre }}: {{ project.name }}</h1>
         <p>{{ project.desc }}</p>
-        <p>{{ project.title }}</p>
-        {% if project.commisioner != None %}
-          <p>Commisioner: {{ project.commisioner }}</p>
-        {% endif %}
+        <button class=details>--- More Details ---</button>
+        <div class=details_panel>
+          <p>Worked as {{ project.title }}, {{ project.date }}.
+            {% if project.commisioner != None %}
+              commisioned by {{ project.commisioner }}
+            {% endif %}
+          </p>
+        </div>
       </div>
 
       {% set tracks = all_tracks[project.id - 1] %}
@@ -84,6 +88,28 @@
 
   {% endfor %}
 
+  <script>
+    // set up the 'More Details' buttons (in the project headers)
+    var acc_buttons = document.getElementsByClassName('details');
+    var i;
+    for (i = 0;i < acc_buttons.length;i++){
+      acc_buttons[i].addEventListener('click', function(){
+        // change the text of the button
+        if (this.innerHTML === "--- More Details ---"){
+          this.innerHTML = "--- Less Details ---";
+        }else{
+          this.innerHTML = "--- More Details ---";
+        }
+        // chance the display state of the details panel
+        var panel = this.nextElementSibling;
+        if (panel.style.display === 'block'){
+          panel.style.display = 'none';
+        }else{
+          panel.style.display = 'block';
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>

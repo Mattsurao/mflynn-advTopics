@@ -14,7 +14,7 @@ class Project(Base):
     # it will only be displayed if the user asks for more details
     # the name of the project
     name = Column(String(63), unique=True)
-    # my title for the project
+    # my title for the project (detail)
     title = Column(String(31))
     # the genre of the commision. Currently: Classical, Soundtrack
     genre = Column(String(10))
