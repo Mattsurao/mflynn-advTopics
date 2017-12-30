@@ -12,7 +12,7 @@
   <div id="nav_bar">
     <ul>
       <li><a href="home.html">Home</a></li>
-      <li><a href="music.html" class="active">Music</a></li>
+      <li><a href="music.html" class=active>Music</a></li>
       <li><a href="bio.html">Bio</a></li>
       <li><a href="gallery.html">Gallery</a></li>
     </ul>
@@ -43,11 +43,16 @@
       <!-- the project is displayed differently if there's only 1 track -->
       {% if tracks|length == 1 %}
         <div class=track>
+          <!-- display information about the track -->
+          <div class=info>
+            <p>Runtime: {{ tracks[0].runtime }}</p>
+            <p>Copyright: {{ tracks[0].copyright }}</p>
+          </div>
           <!-- display any files: MP3s, PDFs, etc. -->
           {% if tracks[0].playback %}
             <div class=audio>
               <p>{{ project.audio_text }}</p>
-              <audio controls oncontextmenu='return false'>
+              <audio controls controlsList='nodownload' oncontextmenu='return false'>
                 <source src="{{ url_for('static', filename = tracks[0].path + '.mp3') }}">
                 Your browser does not support audio playback
               </audio>
@@ -55,7 +60,7 @@
           {% endif %}
           {% if tracks[0].pdf %}
             <a href="{{ url_for('static', filename = tracks[0].path + '.pdf') }}" download>
-              sheet music download
+              Download the sheet music
             </a>
           {% endif %}
         </div>
@@ -64,12 +69,17 @@
       {% else %}
         {% for track in tracks %}
           <div class=track>
-            <h2>{{ track.name }}</h2>
+            <h2>Track {{ track.number }}: {{ track.name }}</h2>
+            <!-- display information about the track -->
+            <div class=info>
+              <p>Runtime: {{ track.runtime }}</p>
+              <p>Copyright: {{ track.copyright }}</p>
+            </div>
             <!-- display any files: MP3s, PDFs, etc. -->
             {% if track.playback %}
               <div class=audio>
                 <p>{{ project.audio_text }}</p>
-                <audio controls oncontextmenu='return false'>
+                <audio controls controlsList='nodownload' oncontextmenu='return false'>
                   <source src="{{ url_for('static', filename = track.path + '.mp3') }}">
                   Your browser does not support audio playback
                 </audio>
@@ -77,7 +87,7 @@
             {% endif %}
             {% if track.pdf %}
               <a href="{{ url_for('static', filename = track.path + '.pdf') }}" download>
-                sheet music download
+                Download the sheet music
               </a>
             {% endif %}
           </div>

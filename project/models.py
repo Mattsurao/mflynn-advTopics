@@ -44,12 +44,19 @@ class Track(Base):
     id = Column(Integer, primary_key=True)
     # the name of the track
     name = Column(String(127), unique=True)
+    # only for projects with multiple tracks
+    number = Column(Integer)
+    # the length of the track (h:mm:ss)
+    runtime = Column(String(7))
+    # any copyright information about the piece
+    copyright = Column(String(63))
     # the name of files associated with this track (in the 'static' folder)
     path = Column(String(31))
     # whether or not the track has audio a user can listen to
     playback = Column(Boolean)
     # whether or not the track has sheet music a user can download
     pdf = Column(Boolean)
+    # relationship to the project
     project_id = Column(Integer, ForeignKey('project.id'))
     project = relationship(Project)
 

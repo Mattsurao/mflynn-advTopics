@@ -58,8 +58,8 @@ div#nav_bar ul li a.active{
 /* Style Defenitions for the projects */
 
 div.proj_head {
-  margin-top: 31px;
-  margin-bottom: 31px;
+  margin-top: 2em;
+  margin-bottom: 2em;
   padding-left: auto;
   padding-right: auto;
   text-align: center;
@@ -68,12 +68,8 @@ div.proj_head {
   rgba(96,64,129,0));
 }
 
-div.proj_head h1 {
-  margin: 10px;
-}
-
-div.proj_head p, h1 {
-  margin-top: 6px;
+div.proj_head p, h1{
+  margin-top: 0.5em;
   margin-left: 30%;
   margin-right: 30%;
 }
@@ -102,19 +98,33 @@ div.details_panel {
 div.track {
   background-color: black;
   border-radius: 8px;
-  margin-top: 31px;
+  margin-top: 3em;
   margin-left: 30%;
   margin-right: 30%;
-  margin-bottom: 31px;
-  padding-top: 31px;
-  padding-left: 31px;
+  margin-bottom: 3em;
+  padding-top: 2em;
+  padding-left: 2em;
   padding-right: auto;
-  padding-bottom: 31px;
+  padding-bottom: 1em;
+}
+
+div.track h2 {
+  margin-top: 0;
+  margin-bottom: 1em;
+  color: white;
+}
+
+div.track div.info {
+  color: white;
+  margin-bottom: 1em;
+}
+
+div.track div.info p {
+  margin: 0;
 }
 
 div.track div.audio {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 1em;
 }
 
 div.track div.audio p {
@@ -124,8 +134,7 @@ div.track div.audio p {
 
 div.track a {
   display: block;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 1em;
   color: white;
   font-weight: bold;
   text-decoration: none;
@@ -133,10 +142,4 @@ div.track a {
 
 div.track a:hover {
   color: rgb(231, 223, 255);
-}
-
-div.track h2 {
-  margin-top: 0px;
-  margin-bottom: 8px;
-  color: white;
 }
