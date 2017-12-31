@@ -25,11 +25,11 @@ def setup():
                        date='2016 - Ongoing')
     db.session.add(project1)
     db.session.add(Track(name='Mystery', path='Mystery', number=1, pdf=True,
-                         playback=True, runtime="2:00", project=project1))
+                         playback=True, project=project1))
     db.session.add(Track(name='Town 1', path='Human Towns', number=2, pdf=False,
-                         playback=True, runtime='1:52', project=project1))
-    db.session.add(Track(name='Battle',path='Random Encounter 2',playback=True,
-                         number=3, runtime='2:16', pdf=False, project=project1))
+                         playback=True, project=project1))
+    db.session.add(Track(name='Battle', path='Random Encounter 2', number=3,
+                         playback=True, pdf=False, project=project1))
     # project2 - Quintet of Night and Day
     d = get_description(descriptions, 1)
     project2 = Project(name='Quintet of Night and Day', title='Composer',
@@ -37,15 +37,14 @@ def setup():
                        date='Dec. 2016 - Jan. 2017')
     db.session.add(project2)
     db.session.add(Track(name='Quintet of Night and Day', path='Quintet',
-                         playback=False, pdf=True, runtime='12:39',
-                         project=project2))
+                         playback=False, pdf=True, project=project2))
     # project2 - The Top
     d = get_description(descriptions, 2)
     project3 = Project(name='The Top', title='Composer', genre='Classical',
                        commisioner=None, desc=d, date='Apr. - May 2017')
     db.session.add(project3)
     db.session.add(Track(name='The Top', path='The Top', playback=False,
-                         pdf=True, runtime='7:22', project=project3))
+                         pdf=True, project=project3))
     db.session.commit()
 
 @app.route('/music')

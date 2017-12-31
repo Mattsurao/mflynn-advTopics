@@ -46,10 +46,6 @@ class Track(Base):
     name = Column(String(127), unique=True)
     # only for projects with multiple tracks
     number = Column(Integer)
-    # the length of the track (h:mm:ss)
-    runtime = Column(String(7))
-    # any copyright information about the piece
-    copyright = Column(String(63))
     # the name of files associated with this track (in the 'static' folder)
     path = Column(String(31))
     # whether or not the track has audio a user can listen to
